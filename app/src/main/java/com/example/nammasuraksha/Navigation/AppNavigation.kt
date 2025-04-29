@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.nammasuraksha.RolePage
 import com.example.nammasuraksha.models.pages.AdminLogin
 import com.example.nammasuraksha.models.pages.AdminSignUpPage
+import com.example.nammasuraksha.models.pages.HomePages.HomePage
 import com.example.nammasuraksha.models.pages.UserLoginPage
 import com.example.nammasuraksha.models.pages.UserSignUp
 
@@ -29,7 +30,11 @@ import com.example.nammasuraksha.models.pages.UserSignUp
                 UserSignUp()
             }
             composable(ROUTES.ADMINSIGNUP.name) {
-                AdminSignUpPage()
+                AdminSignUpPage(navController)
+            }
+
+            composable(ROUTES.ADMINHOMEPAGE.name) {
+                HomePage(navController)
             }
         }
     }
