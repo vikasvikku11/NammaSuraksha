@@ -24,7 +24,7 @@ fun HomePage(navController: NavController) {
         Feature("Predict Future Accident Zones", "predictionScreen"),
         Feature("View Statistics Dashboard", "statsDashboard"),
         Feature("Manage User Reports", "userReports"),
-        Feature("Logout", "login")
+        Feature("Logout", "logout")
     )
 
     Scaffold(

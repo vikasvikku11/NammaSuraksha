@@ -26,11 +26,11 @@ fun UserLoginPage(navController: NavHostController, modifier: Modifier = Modifie
     var loginError by remember { mutableStateOf(false) }
     var loginSuccess by remember { mutableStateOf(false) }
     Column(
-        modifier = Modifier.padding(20.dp)
+
     ){
         TopPortion()
 
-
+Spacer(modifier = Modifier.height(100.dp))
 
             Card(
                 modifier = Modifier
