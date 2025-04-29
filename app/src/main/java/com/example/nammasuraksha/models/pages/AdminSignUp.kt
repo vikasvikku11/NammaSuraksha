@@ -1,6 +1,7 @@
 package com.example.nammasuraksha.models.pages
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -10,9 +11,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
-
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun AdminSignUpPage(modifier: Modifier = Modifier) {
     var department by remember { mutableStateOf("") }
@@ -23,110 +24,127 @@ fun AdminSignUpPage(modifier: Modifier = Modifier) {
 
     val departments = listOf("Police", "Government Official", "Traffic Control", "Transport Department")
 
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
+        contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "Admin Sign Up",
-            style = MaterialTheme.typography.headlineMedium
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Full Name") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Email Address") },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email),
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(text = "Select Department:")
-        DepartmentDropdown(departments) { selected ->
-            department = selected
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        OutlinedTextField(
-            value = uniqueId,
-            onValueChange = { uniqueId = it },
-            label = { Text("Enter Unique ID (Badge/Employee No.)") },
-            placeholder = { Text("If none, auto-generated") },
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        Button(
-            onClick = {
-                val finalId = if (uniqueId.isBlank()) {
-                    generateAutoId(department)
-                } else {
-                    uniqueId
-                }
-                // Handle signup logic with finalId
-            },
-            modifier = Modifier.fillMaxWidth()
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(16.dp),
+            elevation = CardDefaults.cardElevation(8.dp),
+            shape = RoundedCornerShape(16.dp)
         ) {
-            Text("Create Admin Account")
+            Column(
+                modifier = Modifier.padding(24.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text(
+                    text = "Create Admin Account",
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text("Full Name") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                OutlinedTextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    label = { Text("Email Address") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text("Password") },
+                    visualTransformation = PasswordVisualTransformation(),
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                DepartmentDropdown(departments, department) { selected ->
+                    department = selected
+                }
+
+                OutlinedTextField(
+                    value = uniqueId,
+                    onValueChange = { uniqueId = it },
+                    label = { Text("Unique ID (Badge/Employee No.)") },
+                    placeholder = { Text("If none, will be auto-generated") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Button(
+                    onClick = {
+                        val finalId = if (uniqueId.isBlank()) {
+                            generateAutoId(department)
+                        } else {
+                            uniqueId
+                        }
+
+                        // Handle sign-up logic with: name, email, password, department, finalId
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text("Register Admin")
+                }
+            }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DepartmentDropdown(items: List<String>, onItemSelected: (String) -> Unit) {
+fun DepartmentDropdown(
+    items: List<String>,
+    selected: String,
+    onItemSelected: (String) -> Unit
+) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf("") }
 
-    Box {
+     ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded }
+    ) {
         OutlinedTextField(
-            value = selectedText,
+            value = selected,
             onValueChange = {},
-            label = { Text("Department") },
             readOnly = true,
-            modifier = Modifier.fillMaxWidth(),
+            label = { Text("Select Department") },
             trailingIcon = {
-                IconButton(onClick = { expanded = true }) {
-                    Icon(Icons.Filled.ArrowDropDown, contentDescription = null)
-                }
-            }
+                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .menuAnchor()
         )
 
-        DropdownMenu(
+        ExposedDropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            items.forEach { item ->
+            items.forEach { selectionOption ->
                 DropdownMenuItem(
-                    text = { Text(item) },
+                    text = { Text(selectionOption) },
                     onClick = {
-                        selectedText = item
-                        onItemSelected(item)
+                        onItemSelected(selectionOption)
                         expanded = false
                     }
                 )
@@ -135,7 +153,6 @@ fun DepartmentDropdown(items: List<String>, onItemSelected: (String) -> Unit) {
     }
 }
 
-// If uniqueId is not provided, generate something smart
 fun generateAutoId(department: String): String {
     val prefix = when (department) {
         "Police" -> "POL"

@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.navigation.compose.rememberNavController
+import com.example.nammasuraksha.Navigation.AppNavigation
 import com.example.nammasuraksha.ui.theme.NammaSurakshaTheme
 
 class MainActivity : ComponentActivity() {
@@ -12,7 +14,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NammaSurakshaTheme {
-                RolePage()
+                AppNavigation()
             }
         }
     }

@@ -10,10 +10,12 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import com.example.nammasuraksha.Navigation.ROUTES
 
 @Preview
 @Composable
-fun AdminLogin(modifier: Modifier = Modifier) {
+fun AdminLogin(navController: NavHostController, modifier: Modifier = Modifier) {
     var adminId by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var loginError by remember { mutableStateOf(false) }
@@ -65,11 +67,13 @@ fun AdminLogin(modifier: Modifier = Modifier) {
         }
 
         Spacer(modifier = Modifier.height(12.dp))
+TextButton(
+    onClick = {
+navController.navigate(ROUTES.ADMINSIGNUP.name)
+    }
+) {
+    Text("SignUp")
+}
 
-        if (loginSuccess) {
-            Text("✅ Login successful!", color = MaterialTheme.colorScheme.primary)
-        } else if (loginError) {
-            Text("❌ Invalid Admin ID or Password", color = MaterialTheme.colorScheme.error)
-        }
     }
 }
