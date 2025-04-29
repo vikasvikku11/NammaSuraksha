@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,36 +21,34 @@ import androidx.compose.ui.unit.sp
 import com.example.nammasuraksha.R
 
 @Composable
-fun TopPortion() {
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Card(
-            modifier = Modifier
-                .height(100.dp)
-                .fillMaxWidth()
-        ) {
-            Row(
+fun TopPortion(modifier: Modifier = Modifier) {
 
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .padding(start = 55.dp, top = 25.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.the_karnataka_government_kannada_seeklogo),
-                    contentDescription = null,
-                    modifier = Modifier.size(60.dp)
+    Card(
+        modifier = Modifier
+            .height(100.dp)
+            .fillMaxWidth()
+    ) {
+        Row(
+
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(start = 55.dp, top = 25.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.the_karnataka_government_kannada_seeklogo),
+                contentDescription = null,
+                modifier = Modifier.size(60.dp)
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+
+            Column {
+                Text(
+                    "Karnataka State Police",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.W500,
+                    modifier = Modifier.padding(top = 12.dp)
                 )
-                Spacer(modifier = Modifier.width(10.dp))
-                Column {
-                    Text(
-                        "Karnataka State Police",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.W500,
-                        modifier = Modifier.padding(top = 12.dp)
-                    )
-                    Text("Government of Karnataka", fontSize = 12.sp, fontWeight = FontWeight.W400)
-                }
+                Text("Government of Karnataka", fontSize = 12.sp, fontWeight = FontWeight.W400)
             }
         }
     }
