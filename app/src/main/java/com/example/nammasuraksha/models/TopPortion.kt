@@ -29,7 +29,6 @@ fun TopPortion(modifier: Modifier = Modifier) {
             .fillMaxWidth()
     ) {
         Row(
-
             modifier = Modifier
                 .fillMaxHeight()
                 .padding(start = 55.dp, top = 25.dp)
