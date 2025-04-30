@@ -63,4 +63,6 @@ dependencies {
     implementation ("androidx.compose.foundation:foundation:1.8.0")
     implementation("androidx.compose.material:material-icons-extended:<compose_version>")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation ("androidx.compose.animation:animation:1.6.0")
+    implementation ("androidx.compose.material:material-icons-extended:1.6.0")
 }
