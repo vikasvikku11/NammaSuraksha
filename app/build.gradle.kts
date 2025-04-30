@@ -60,5 +60,7 @@ dependencies {
     val nav_version = "2.8.9"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
-
+    implementation ("androidx.compose.foundation:foundation:1.8.0")
+    implementation("androidx.compose.material:material-icons-extended:<compose_version>")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 }

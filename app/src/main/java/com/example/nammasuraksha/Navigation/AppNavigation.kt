@@ -5,6 +5,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.nammasuraksha.RolePage
+import com.example.nammasuraksha.models.FeaturesScreen.HotspotMapScreen
+import com.example.nammasuraksha.models.FeaturesScreen.PredictionScreen
+import com.example.nammasuraksha.models.FeaturesScreen.StatisticsDashboard
+import com.example.nammasuraksha.models.FeaturesScreen.UploadDataScreen
+import com.example.nammasuraksha.models.FeaturesScreen.UserReportsScreen
 import com.example.nammasuraksha.models.pages.AdminLogin
 import com.example.nammasuraksha.models.pages.AdminSignUpPage
 import com.example.nammasuraksha.models.pages.HomePages.HomePage
@@ -40,7 +45,7 @@ fun AppNavigation() {
         composable("predictionScreen") { PredictionScreen(navController) }
         composable("statsDashboard") { StatisticsDashboard(navController) }
         composable("userReports") { UserReportsScreen(navController) }
-        composable("login") { LoginScreen(navController) }
+
 
     }
 }
